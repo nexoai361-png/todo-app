@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-env jest */
 
 jest.mock('react-native-safe-area-context', () => {
   const React = require('react');
