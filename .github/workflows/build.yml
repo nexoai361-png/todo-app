@@ -20,7 +20,7 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install npm dependencies
         run: npm ci
 
       - name: Run linter
@@ -39,10 +39,8 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Build Android APK
-        run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleDebug
+        working-directory: android
+        run: ./gradlew assembleDebug
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
