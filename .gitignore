@@ -24,4 +24,5 @@ lerna.tar.gz
 *.swp
 *.swo
 *.DS_Store
-Thumbs.dbandroid/app/debug.keystore
+Thumbs.db
+android/app/debug.keystore
