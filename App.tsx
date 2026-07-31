@@ -6,10 +6,10 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  StatusBar,
   useColorScheme,
 } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
 
 interface Todo {
   id: string;
@@ -61,7 +61,7 @@ function App() {
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar style={isDarkMode ? 'light' : 'dark'} />
       <SafeAreaView
         style={[
           styles.container,

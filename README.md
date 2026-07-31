@@ -1,97 +1,94 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Todo App
 
-# Getting Started
+A simple Todo App built with React Native and Expo.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- Add, toggle (complete), and delete todos
+- Dark/light theme support
+- Clean, intuitive UI
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Getting Started
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Prerequisites
+
+- Node.js 22+
+- npm or yarn
+- Expo Go app (for mobile testing) or Android/iOS simulator
+
+### Installation
 
 ```sh
-# Using npm
+# Clone the repository
+git clone https://github.com/nexoai361-png/todo-app.git
+cd todo-app
+
+# Install dependencies
+npm install
+
+# Start the development server
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
+### Running on Mobile
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+1. Install the [Expo Go](https://expo.dev/go) app on your iOS or Android device
+2. Scan the QR code from the terminal output
+3. The app will load instantly on your device
 
-### Android
+### Building Standalone Apps
+
+This project uses [EAS Build](https://docs.expo.dev/build/introduction/) for building standalone apps.
+
+#### Build Android APK
 
 ```sh
-# Using npm
-npm run android
+# Install EAS CLI globally
+npm install -g eas-cli
 
-# OR using Yarn
-yarn android
+# Build Android APK
+eas build -p android --profile preview
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+#### Build iOS App
 
 ```sh
-bundle install
+# Build iOS app
+eas build -p ios --profile preview
 ```
 
-Then, and every time you update your native dependencies, run:
+### GitHub Actions
 
-```sh
-bundle exec pod install
+This project includes a GitHub Actions workflow that:
+- Runs linting and tests on every push/PR
+- Builds Android APK using EAS Build
+
+The workflow triggers on all branches. To use EAS Build in GitHub Actions, add your `EXPO_TOKEN` as a repository secret in GitHub.
+
+## Project Structure
+
+```
+├── App.tsx              # Main app component
+├── __tests__/           # Test files
+├── .github/workflows/   # GitHub Actions workflows
+├── eas.json             # EAS Build configuration
+├── app.json             # Expo configuration
+├── package.json
+└── tsconfig.json
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## Available Scripts
 
-```sh
-# Using npm
-npm run ios
+- `npm start` - Start the Expo dev server
+- `npm run android` - Open app in Android emulator or Expo Go
+- `npm run ios` - Open app in iOS simulator or Expo Go
+- `npm run lint` - Run ESLint
+- `npm test` - Run Jest tests
+- `npm run build:android` - Build Android APK (local)
+- `npm run build:ios` - Build iOS app (local)
 
-# OR using Yarn
-yarn ios
-```
+## Learn More
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- [Expo Documentation](https://docs.expo.dev/)
+- [React Native Documentation](https://reactnative.dev/)
+- [EAS Build Documentation](https://docs.expo.dev/build/introduction/)

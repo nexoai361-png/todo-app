@@ -7,8 +7,30 @@ on:
     branches: ['**']
 
 jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
   build:
     runs-on: ubuntu-latest
+    needs: lint-test
 
     steps:
       - name: Checkout code
@@ -20,41 +42,18 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
-      - name: Install npm dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: Run linter
-        run: npm run lint
-
-      - name: Run tests
-        run: npm test
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-        with:
-          api-level: 34
-          ndk: 25.2.9519653
-          ndk-level: 25.2.9519653
-          build-tools: 34.0.0
-          ndk-api-level: 24
-
-      - name: Generate debug keystore
-        run: |
-          mkdir -p android/app
-          keytool -genkeypair -v -keystore android/app/debug.keystore -storepass android -keypass android -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keyalg RSA -keysize 2048 -validity 10000
+      - name: Setup EAS CLI
+        run: npm install -g eas-cli
 
       - name: Build Android APK
-        working-directory: android
-        run: ./gradlew assembleDebug --no-daemon
+        run: eas build -p android --profile preview --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Download artifact
+        run: |
+          echo "Build completed. Check the EAS dashboard for the APK."
+          echo "EAS Build URL: https://expo.dev/accounts/${{ secrets.EXPO_ACCOUNT_NAME }}/projects/${{ github.repository }}/builds"
